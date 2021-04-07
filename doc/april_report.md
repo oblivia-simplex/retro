@@ -12,12 +12,8 @@ The purpose of our AIMEE Weird Mario project is to use ML techniques to study re
 
 
 We use the emulated SNES video-game environment as a logistically efficient proxy to the case exploiting complex applications by means of highly constrained user input---constrained, in this case, to a small alphabet of control signals: up, down, right, left, A, B, X, Y, select, left-pad, right-pad. Working within an emulated video-games environment has two crucial advantages: 
-
-
-First, there is a strong foundation of existing open source infrastructure for interfacing ML algorithms with an emulated SNES environment, as well as well-developed best-practices regarding the appropriate learning algorithms, network architectures, and hyperparameters for deep reinforcement learning in arcade environments.
-
-
-Second, exploitation of emulated SNES games is an active and well-documented area of amature ‘straw hat’ exploitation research. The exploitation terrain of the SNES game Super Mario World, in particular, has been extensively albeit non-systematically studied and documented by speed-runners, modders, and recreational hackers. 
+1. there is a strong foundation of existing open source infrastructure for interfacing ML algorithms with an emulated SNES environment, as well as well-developed best-practices regarding the appropriate learning algorithms, network architectures, and hyperparameters for deep reinforcement learning in arcade environments.
+2. exploitation of emulated SNES games is an active and well-documented area of amature ‘straw hat’ exploitation research. The exploitation terrain of the SNES game Super Mario World, in particular, has been extensively albeit non-systematically studied and documented by speed-runners, modders, and recreational hackers. 
 
 
 
@@ -132,11 +128,11 @@ Weird Mario PPO can initialize Mario with an item-box mushroom (that is, artific
 Weird Mario PPO has five basic reward settings to choose from: 
 
 
-- Weird Mario gives +1 reward every time the game’s Yoshi Coin counter (a memory address intended to keep count of the number of ‘Yoshi Coins’ Mario collects) goes up.
-- As per (1.) but rewarding the delta.
-- Weird Mario gives +1 reward for every step in which a size n initial segment of the step’s program-counter record features a previously unseen (per episode) instruction. 
-- As per (3) but reward the delta.  
-- Weird Mario keeps track (within-episode) of the maximum screen-brightness value so far, and rewards the delta of the maximum.  
+1. Weird Mario gives +1 reward every time the game’s Yoshi Coin counter (a memory address intended to keep count of the number of ‘Yoshi Coins’ Mario collects) goes up.
+2. As per (1) but rewarding the delta.
+3. Weird Mario gives +1 reward for every step in which a size n initial segment of the step’s program-counter record features a previously unseen (per episode) instruction. 
+4. As per (3) but reward the delta.  
+5. Weird Mario keeps track (within-episode) of the maximum screen-brightness value so far, and rewards the delta of the maximum.  
 
 
 We found that reward settings in these five general formats reliably induce weird-state escalation in Weird Mario PPO, as (informally speaking) the agent quickly learns that weird-state space allows for trajectories whose total reward is an order of magnitude greater than the most rewarding trajectories in intended-state space. The principle that weird-state space is as a rule more ‘open ended’ than intended-state space also encouraged us to try integrating OpenAI’s ‘curiosity drive’ intrinsic exploration-reward formula into our reward functions, but our preliminary experiments with the method suggested that the high risk of  weird-state escalation resulting in a loop strongly deters ‘curiosity drive’ agents from weird-state escalation. 

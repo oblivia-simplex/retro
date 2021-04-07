@@ -11,12 +11,8 @@ The purpose of our Weird Mario project is to use ML techniques to study regulari
 
 
 We use the emulated SNES video-game environment as a logistically efficient proxy to the case exploiting complex applications by means of highly constrained user input---constrained, in this case, to a small alphabet of control signals: up, down, right, left, A, B, X, Y, left-pad, right-pad. Working within an emulated video-games environment has two crucial advantages: 
-
-
-First, there is a strong foundation of existing open source infrastructure for interfacing ML algorithms with an emulated SNES environment, as well as well-developed best-practices regarding the appropriate learning algorithms, network architectures, and hyperparameters for deep reinforcement in arcade environments.
-
-
-Second, exploitation of emulated SNES games is an active and well-documented area of amature ‘straw hat’ exploitation research. The exploitation terrain of SNES game Super Mario World, in particular, has been extensively albeit non-systematically studied and documented by speed-runners, modders, and recreational hackers. 
+1. There is a strong foundation of existing open source infrastructure for interfacing ML algorithms with an emulated SNES environment, as well as well-developed best-practices regarding the appropriate learning algorithms, network architectures, and hyperparameters for deep reinforcement in arcade environments.
+1. Exploitation of emulated SNES games is an active and well-documented area of amateur ‘straw hat’ exploitation research. The exploitation terrain of SNES game Super Mario World, in particular, has been extensively albeit non-systematically studied and documented by speed-runners, modders, and recreational hackers. 
 
 
 
@@ -56,7 +52,7 @@ We chose the PPO algorithm after informally experimenting with more basic actor-
 ## Basic Setup
 
 
-For all our experiments, we artificially initialize Super Mario World in a ‘contained’ weird state known to be stable: We set the value of Mario’s ‘power-up state’ counter is to 22, which renders the Mario sprite orange but does not further affect gameplay unless the agent collects an item that further increments Mario’s power-up state counter. If and when this additional incrementation takes place, what’s known to SNES hackers as an ‘open bus’ anomaly takes place: the SNES attempts to read a subroutine from an unmapped address, which initiates a sequence of hardware responses that results in executing the last value read (the last byte of the unmapped address) as an instruction.  
+For all our experiments, we artificially initialize Super Mario World in a ‘contained’ weird state known to be stable: We set the value of Mario’s ‘power-up state’ counter to 22, which renders the Mario sprite orange but does not further affect gameplay unless the agent collects an item that further increments Mario’s power-up state counter. If and when this additional incrementation takes place, what’s known to SNES hackers as an ‘open bus’ anomaly takes place: the SNES attempts to read a subroutine from an unmapped address, which initiates a sequence of hardware responses that results in executing the last value read (the last byte of the unmapped address) as an instruction.  
 
 
 The initial ‘contained’ weird state, known in the Super Mario World hacking community as ‘Creamsicle Mario,’ is normally reachable on level 1 of Super Mario World through a sequence of in-game manipulations known as ‘powerup incrementation.’ Once a player is in Creamsicle Mario state, the state is maintained by default when a player completes a level or enters a level.  Our setup assumes a scenario in which a player has transitioned to Creamsicle Mario on level 1, and is now entering a new level (or reentering level 1) while in Creamsicle Mario state.
